@@ -11,13 +11,13 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 import { ProductSearchbar } from '@/components/molecules/productSearchbar';
 import { ProductCarousel } from '@/components/organisms/productCarousel';
-import { Pill } from '@/components/atoms/pill';
 
 import { trpc } from '@/lib/trpc';
 import { createProxySSGHelpers } from '@trpc/react-query/ssg';
 import { appRouter } from '@/server/trpc/router';
 import { createContext } from '@/server/trpc/context';
 import { useDeviceWidth } from '@/lib/hooks/useDeviceWidth';
+import FeatureLink from '@/components/atoms/featureLink';
 
 
 const heroImages = [
@@ -65,15 +65,13 @@ const Home = () => {
         <ul className="my-6 flex w-full flex-wrap pl-0 md:my-12 w-[80%] md:w-[60%]">
           {categories?.map((category) => {
             return (
-              <li className="flex-auto text-center" key={category.id}>
-                <Pill
+              <li className="flex-auto text-center w-1/2 md:w-1/3 lg:w-1/4 p-2" key={category.id}>
+                <FeatureLink
+                  title={category.name}
                   href={`/products/listing#${category.name}`}
-                  roundedStyle="rounded-md"
-                  className="m-1 bg-primary-blue text-xl md:m-2"
-                  textClassName='text-white'
-                >
-                  {category.name}
-                </Pill>
+                  color="text-white-900"
+                  backgroundColor='bg-gray-200'
+                />  
               </li>
             );
           })}
